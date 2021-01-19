@@ -23,9 +23,8 @@ namespace ProyectoBiblioteca.Controllers
                           {
                               IdAutor = b.IdAutor,
                               NombreAutor = b.NombreAutor,
-                              ApellidoPaterno = b.ApellidoPaterno,
-                              ApellidoMaterno = b.ApellidoMaterno,
-                              FechaNacimiento = b.FechaNacimiento
+                              ApellidoAutor = b.ApellidoAutor,
+                              Nacionalidad = b.Nacionalidad
                           };
             return autores;
         }
@@ -46,9 +45,8 @@ namespace ProyectoBiblioteca.Controllers
             {
                 IdAutor = value.IdAutor,
                 NombreAutor = value.NombreAutor,
-                ApellidoPaterno = value.ApellidoPaterno,
-                ApellidoMaterno = value.ApellidoMaterno,
-                FechaNacimiento = value.FechaNacimiento
+                ApellidoAutor = value.ApellidoAutor,
+                Nacionalidad = value.Nacionalidad
             };
             context.Autor.Add(autores);
             context.SaveChanges();
