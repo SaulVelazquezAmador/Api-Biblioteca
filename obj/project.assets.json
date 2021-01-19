@@ -941,19 +941,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Saul\\.nuget\\packages\\": {}
+    "C:\\Users\\olgag\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Saul\\source\\repos\\ProyectoBiblioteca\\ProyectoBiblioteca.csproj",
+      "projectUniqueName": "C:\\Users\\olgag\\Documentos\\GitHub\\Api-Biblioteca\\ProyectoBiblioteca.csproj",
       "projectName": "ProyectoBiblioteca",
-      "projectPath": "C:\\Users\\Saul\\source\\repos\\ProyectoBiblioteca\\ProyectoBiblioteca.csproj",
-      "packagesPath": "C:\\Users\\Saul\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Saul\\source\\repos\\ProyectoBiblioteca\\obj\\",
+      "projectPath": "C:\\Users\\olgag\\Documentos\\GitHub\\Api-Biblioteca\\ProyectoBiblioteca.csproj",
+      "packagesPath": "C:\\Users\\olgag\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\olgag\\Documentos\\GitHub\\Api-Biblioteca\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Saul\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\olgag\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
