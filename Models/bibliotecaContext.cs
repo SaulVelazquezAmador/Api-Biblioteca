@@ -51,21 +51,17 @@ namespace ProyectoBiblioteca.Models
 
                 entity.Property(e => e.IdAutor).HasColumnName("ID_Autor");
 
-                entity.Property(e => e.ApellidoMaterno)
-                    .HasColumnName("Apellido_Materno")
+                entity.Property(e => e.ApellidoAutor)
+                    .HasColumnName("Apellido_Autor")
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
 
-                entity.Property(e => e.ApellidoPaterno)
-                    .HasColumnName("Apellido_Paterno")
+                entity.Property(e => e.Nacionalidad)
+                    .HasColumnName("Nacionalidad")
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
-
-                entity.Property(e => e.FechaNacimiento)
-                    .HasColumnName("Fecha_Nacimiento")
-                    .HasColumnType("date");
 
                 entity.Property(e => e.NombreAutor)
                     .HasColumnName("Nombre_Autor")
@@ -179,14 +175,8 @@ namespace ProyectoBiblioteca.Models
 
                 entity.Property(e => e.IdLector).HasColumnName("ID_Lector");
 
-                entity.Property(e => e.ApellidoMaterno)
+                entity.Property(e => e.Apellido)
                     .HasColumnName("Apellido_Materno")
-                    .HasColumnType("varchar(45)")
-                    .HasCharSet("utf8")
-                    .HasCollation("utf8_general_ci");
-
-                entity.Property(e => e.ApellidoPaterno)
-                    .HasColumnName("Apellido_Paterno")
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
