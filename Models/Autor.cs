@@ -11,8 +11,7 @@ namespace ProyectoBiblioteca.Models
     {
         public int IdAutor { get; set; }
         public string NombreAutor { get; set; }
-        public string ApellidoPaterno { get; set; }
-        public string ApellidoMaterno { get; set; }
-        public DateTime? FechaNacimiento { get; set; }
+        public string ApellidoAutor{ get; set; }
+        public string Nacionalidad { get; set; }
     }
 }
