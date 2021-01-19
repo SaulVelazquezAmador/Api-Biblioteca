@@ -176,7 +176,7 @@ namespace ProyectoBiblioteca.Models
                 entity.Property(e => e.IdLector).HasColumnName("ID_Lector");
 
                 entity.Property(e => e.Apellido)
-                    .HasColumnName("Apellido_Materno")
+                    .HasColumnName("Apellido")
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
