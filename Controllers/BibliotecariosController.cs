@@ -22,6 +22,7 @@ namespace ProyectoBiblioteca.Controllers
             var empleados = from b in context.Bibliotecario
                             select new Bibliotecario
                             {
+                                IdBibliotecario = b.IdBibliotecario,
                                 NombreBibliotecario = b.NombreBibliotecario,
                                 ApellidoBibliotecario = b.ApellidoBibliotecario,
                                 Correo = b.Correo,
@@ -64,6 +65,11 @@ namespace ProyectoBiblioteca.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var context = new bibliotecaContext();
+            var empleado = context.Bibliotecario.Where<Bibliotecario>(e => e.IdBibliotecario == id).FirstOrDefault();
+            if (empleado == null) return;
+            context.Bibliotecario.Remove(empleado);
+            context.SaveChanges();
         }
     }
 }
