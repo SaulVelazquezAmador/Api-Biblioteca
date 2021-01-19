@@ -42,3 +42,5 @@ C:\Users\Saul\source\repos\ProyectoBiblioteca\obj\Debug\netcoreapp3.1\ProyectoBi
 C:\Users\Saul\source\repos\ProyectoBiblioteca\obj\Debug\netcoreapp3.1\ProyectoBiblioteca.pdb
 C:\Users\Saul\source\repos\ProyectoBiblioteca\obj\Debug\netcoreapp3.1\ProyectoBiblioteca.genruntimeconfig.cache
 C:\Users\Saul\source\repos\ProyectoBiblioteca\obj\Debug\netcoreapp3.1\scopedcss\bundle\ProyectoBiblioteca.styles.css
+C:\Users\olgag\Documentos\GitHub\Api-Biblioteca\obj\Debug\netcoreapp3.1\ProyectoBiblioteca.dll
+C:\Users\olgag\Documentos\GitHub\Api-Biblioteca\obj\Debug\netcoreapp3.1\ProyectoBiblioteca.pdb
