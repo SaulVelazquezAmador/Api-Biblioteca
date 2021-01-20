@@ -22,7 +22,7 @@ namespace ProyectoBiblioteca.Controllers
                                 select new Libreros
                                 {
                                     IdLibrero = b.IdLibrero,
-                                    NombreLibrero = WebUtility.HtmlEncode(b.NombreLibrero)
+                                    NombreLibrero = b.NombreLibrero
                                 };
             return librero;
 

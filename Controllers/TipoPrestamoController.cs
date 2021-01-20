@@ -22,7 +22,7 @@ namespace ProyectoBiblioteca.Controllers
                                 select new TipoPrestamo
                                 {
                                     IdTipo = b.IdTipo,
-                                    Tipo = WebUtility.HtmlEncode (b.Tipo)
+                                    Tipo = b.Tipo
                                 };
             return tipoprestamo;
         }

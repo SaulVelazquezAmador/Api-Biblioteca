@@ -23,7 +23,7 @@ namespace ProyectoBiblioteca.Controllers
                               select new Clasificacion
                               {
                                   IdClasificacion = b.IdClasificacion,
-                                  NombreClasificacion = WebUtility.HtmlEncode(b.NombreClasificacion)
+                                  NombreClasificacion = b.NombreClasificacion
                               };
                 return clasificacion;
         }
