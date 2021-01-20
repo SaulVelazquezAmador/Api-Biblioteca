@@ -32,6 +32,7 @@ namespace ProyectoBiblioteca.Controllers
                          REditorial = b.REditorial,
                          RClasificacion = b.RClasificacion,
                          RSubclasificacion = b.RSubclasificacion,
+                         RUbicacion = b.RUbicacion,
                          Año = b.Año,
                          Existencias = b.Existencias
                      };
