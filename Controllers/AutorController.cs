@@ -43,7 +43,6 @@ namespace ProyectoBiblioteca.Controllers
                 return null;
             }
 
-            
             return autor;
         }
 

@@ -94,8 +94,35 @@ namespace ProyectoBiblioteca.Controllers
 
         // PUT api/<BibliotecariosController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] Bibliotecario value)
         {
+            bool error = false;
+
+            try
+            {
+                var context = new bibliotecaContext();
+
+                var bibliotecario = context.Bibliotecario.Where<Bibliotecario>(e => e.IdBibliotecario == id).FirstOrDefault();
+                if (bibliotecario == null)
+                {
+                    return new JsonResult(new { Status = "Fail" }); ;
+                }
+
+                bibliotecario.Contraseña = WebUtility.HtmlEncode(value.Contraseña);
+
+                context.SaveChanges();
+            }
+            catch
+            {
+                error = true;
+            }
+
+            var result = new
+            {
+                Status = !error ? "Success" : "Fail"
+            };
+
+            return new JsonResult(result);
         }
 
         // DELETE api/<BibliotecariosController>/5
@@ -103,9 +130,9 @@ namespace ProyectoBiblioteca.Controllers
         public void Delete(int id)
         {
             var context = new bibliotecaContext();
-            var empleado = context.Bibliotecario.Where<Bibliotecario>(e => e.IdBibliotecario == id).FirstOrDefault();
-            if (empleado == null) return;
-            context.Bibliotecario.Remove(empleado);
+            var bibliotecario = context.Bibliotecario.Where<Bibliotecario>(e => e.IdBibliotecario == id).FirstOrDefault();
+            if (bibliotecario == null) return;
+            context.Bibliotecario.Remove(bibliotecario);
             context.SaveChanges();
         }
     }
