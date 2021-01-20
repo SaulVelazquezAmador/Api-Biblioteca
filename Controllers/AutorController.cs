@@ -104,7 +104,7 @@ namespace ProyectoBiblioteca.Controllers
                     return new JsonResult(new { Status = "Fail" }); ;
                 }
 
-                autor.Nacionalidad = WebUtility.HtmlEncode(value.Nacionalidad);
+                autor.Nacionalidad = value.Nacionalidad;
                // autor.NombreAutor = WebUtility.HtmlEncode(value.NombreAutor);
                 //autor.ApellidoAutor = WebUtility.HtmlEncode(value.ApellidoAutor);
 
