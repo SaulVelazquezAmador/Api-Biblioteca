@@ -16,14 +16,7 @@ namespace ProyectoBiblioteca.Controllers
         // GET: api/<LibrosController>
         [HttpGet]
         public IEnumerable<Libro> Get()
-        {// SELECT employees.first_name, employees.last_name, titles.title, salaries.salary
-            // FROM employees INNER JOIN titles ON employees.emp_no = titles.emp_no
-            // INNER JOIN salaries ON employees.emp_no = salaries.emp_no
-            // INNER JOIN inner join dept_emp ON employees.emp_no = dept_emp.emp_no
-            // INNER JOIN dept_manager ON employees.emp_no = dept_manager.emp_no
-            // WHERE employees.last_name like 'smith'
-                                
-
+        {
         var context = new bibliotecaContext();
         var libro = from b in context.Libro
                      join s in context.AutoresLibro on b.Isbn equals s.RIsbn
@@ -31,8 +24,8 @@ namespace ProyectoBiblioteca.Controllers
                      join u in context.Clasificacion on b.RClasificacion equals u.IdClasificacion
                      join v in context.Subclasificacion on b.RSubclasificacion equals v.IdSubclasificacion
                      join w in context.Libreros on b.RUbicacion equals w.IdLibrero
-
-        select new Libro
+                    orderby b.Isbn ascending
+                    select new Libro
                      {
                          Isbn = b.Isbn,
                          Titulo = b.Titulo,
