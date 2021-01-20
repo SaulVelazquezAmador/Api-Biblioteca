@@ -25,7 +25,7 @@ namespace ProyectoBiblioteca.Controllers
                                 
 
         var context = new bibliotecaContext();
-        var libros = from b in context.Libro
+        var libro = from b in context.Libro
                      join s in context.AutoresLibro on b.Isbn equals s.RIsbn
                      join t in context.Editorial on b.REditorial equals t.IdEditorial
                      join u in context.Clasificacion on b.RClasificacion equals u.IdClasificacion
@@ -43,7 +43,7 @@ namespace ProyectoBiblioteca.Controllers
                          Año = b.Año,
                          Existencias = b.Existencias
                      };
-            return libros;
+            return libro;
         }
 
         // GET api/<LibrosController>/5
