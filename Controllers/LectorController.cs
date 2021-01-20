@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Net;
 using ProyectoBiblioteca.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -22,12 +22,12 @@ namespace ProyectoBiblioteca.Controllers
             select new Lector
             {
                 IdLector = b.IdLector,
-                Nombre = b.Nombre,
-                Apellido = b.Apellido,
-                Edad = b.Edad,
-                Direccion = b.Direccion,
-                Correo = b.Correo,
-                Telefono = b.Telefono,
+                Nombre = WebUtility.HtmlEncode(b.Nombre),
+                Apellido = WebUtility.HtmlEncode(b.Apellido),
+                Edad = (b.Edad),
+                Direccion = WebUtility.HtmlEncode(b.Direccion),
+                Correo = WebUtility.HtmlEncode(b.Correo),
+                Telefono = WebUtility.HtmlEncode(b.Telefono),
                 PrestamosActivos = b.PrestamosActivos
             };
             return lectores;
@@ -35,16 +35,51 @@ namespace ProyectoBiblioteca.Controllers
 
         // GET api/<LectorController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Lector Get(int id)
         {
-            return "value";
+            var context = new bibliotecaContext();
+
+            Lector cliente = context.Lector.Where<Lector>(e => e.IdLector == id).FirstOrDefault<Lector>();
+            if (cliente == null)
+            {
+                return null;
+            }
+
+            return cliente;
         }
 
         // POST api/<LectorController>
         [HttpPost]
-        public void Post([FromBody] Lector value)
+        public IActionResult Post([FromBody] Lector value)
         {
-            var context = new bibliotecaContext();
+            bool error = false;
+
+            string nombre = WebUtility.HtmlEncode(value.Nombre);
+            string apellido = WebUtility.HtmlEncode(value.Apellido);
+            string direccion = WebUtility.HtmlEncode(value.Direccion);
+            string correo = WebUtility.HtmlEncode(value.Correo);
+            string telefono = WebUtility.HtmlEncode(value.Telefono);
+
+            try
+            {
+                var context = new bibliotecaContext();
+                context.Lector.Add(value);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException.Message);
+                error = true;
+            }
+
+            var result = new
+            {
+                Status = !error ? "Success" : "Fail"
+            };
+
+            return new JsonResult(result);
+
+            /*var context = new bibliotecaContext();
             Lector lectores = new Lector
             {
                 IdLector = value.IdLector,
@@ -58,6 +93,7 @@ namespace ProyectoBiblioteca.Controllers
             };
             context.Lector.Add(lectores);
             context.SaveChanges();
+            */
         }
 
         // PUT api/<LectorController>/5

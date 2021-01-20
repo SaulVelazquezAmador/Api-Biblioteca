@@ -19,10 +19,10 @@ namespace ProyectoBiblioteca.Controllers
         {
             var context = new bibliotecaContext();
             var prestamo = from b in context.Prestamos
-                           join s in context.Libro on b.RLibro equals s.Isbn
+                         /*  join s in context.Libro on b.RLibro equals s.Isbn
                            join t in context.Lector on b.RLector equals t.IdLector
                            join u in context.TipoPrestamo on b.RTipoPrestamo equals u.IdTipo
-
+                         */
                             select new Prestamos
                             {
                                 IdPrestamo = b.IdPrestamo,
