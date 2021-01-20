@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Net;
 using ProyectoBiblioteca.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -19,10 +19,7 @@ namespace ProyectoBiblioteca.Controllers
         {
             var context = new bibliotecaContext();
             var prestamo = from b in context.Prestamos
-                         /*  join s in context.Libro on b.RLibro equals s.Isbn
-                           join t in context.Lector on b.RLector equals t.IdLector
-                           join u in context.TipoPrestamo on b.RTipoPrestamo equals u.IdTipo
-                         */
+
                             select new Prestamos
                             {
                                 IdPrestamo = b.IdPrestamo,
@@ -38,9 +35,17 @@ namespace ProyectoBiblioteca.Controllers
 
         // GET api/<PrestamosController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Prestamos Get(int id)
         {
-            return "value";
+            var context = new bibliotecaContext();
+
+            Prestamos prestamos = context.Prestamos.Where<Prestamos>(e => e.IdPrestamo == id).FirstOrDefault<Prestamos>();
+            if (prestamos == null)
+            {
+                return null;
+            }
+
+            return prestamos;
         }
 
         // POST api/<PrestamosController>
@@ -66,6 +71,7 @@ namespace ProyectoBiblioteca.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+
         }
 
         // DELETE api/<PrestamosController>/5
