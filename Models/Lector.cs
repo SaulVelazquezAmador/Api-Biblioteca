@@ -20,7 +20,7 @@ namespace ProyectoBiblioteca.Models
         public int? Edad { get; set; }
         public string Direccion { get; set; }
         public string Correo { get; set; }
-        public int? Telefono { get; set; }
+        public string Telefono { get; set; }
         public int? PrestamosActivos { get; set; }
 
         public virtual ICollection<Prestamos> Prestamos { get; set; }
