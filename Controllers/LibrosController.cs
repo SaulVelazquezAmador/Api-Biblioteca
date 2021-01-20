@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Net;
 using ProyectoBiblioteca.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -23,7 +23,8 @@ namespace ProyectoBiblioteca.Controllers
                     select new Libro
                      {
                          Isbn = b.Isbn,
-                         Titulo = b.Titulo,
+                         Titulo = WebUtility.HtmlEncode(b.Titulo),
+                         RAutor = b.RAutor,
                          REditorial = b.REditorial,
                          RClasificacion = b.RClasificacion,
                          RSubclasificacion = b.RSubclasificacion,
@@ -36,15 +37,47 @@ namespace ProyectoBiblioteca.Controllers
 
         // GET api/<LibrosController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Libro Get(string id)
         {
-            return "value";
+            var context = new bibliotecaContext();
+
+            Libro libro = context.Libro.Where<Libro>(e => e.Isbn == id).FirstOrDefault<Libro>();
+            if (libro == null)
+            {
+                return null;
+            }
+
+            return libro;
         }
 
         // POST api/<LibrosController>
         [HttpPost]
-        public void Post([FromBody] Libro value)
+        public IActionResult Post([FromBody] Libro value)
         {
+            bool error = false;
+
+            string titulo = WebUtility.HtmlEncode(value.Titulo);
+
+            try
+            {
+                var context = new bibliotecaContext();
+                context.Libro.Add(value);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException.Message);
+                error = true;
+            }
+
+            var result = new
+            {
+                Status = !error ? "Success" : "Fail"
+            };
+
+            return new JsonResult(result);
+
+            /*
             var context = new bibliotecaContext();
             Libro libro = new Libro
             {
@@ -56,9 +89,11 @@ namespace ProyectoBiblioteca.Controllers
                 RUbicacion = value.RUbicacion,
                 Año = value.Año,
                 Existencias = value.Existencias
+                
             };
             context.Libro.Add(libro);
             context.SaveChanges();
+            */
         }
 
         // PUT api/<LibrosController>/5

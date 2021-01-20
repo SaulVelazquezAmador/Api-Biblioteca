@@ -98,8 +98,39 @@ namespace ProyectoBiblioteca.Controllers
 
         // PUT api/<LectorController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] Lector value)
         {
+            bool error = false;
+
+            try
+            {
+                var context = new bibliotecaContext();
+
+                var cliente = context.Lector.Where<Lector>(e => e.IdLector == id).FirstOrDefault();
+                if (cliente == null)
+                {
+                    return new JsonResult(new { Status = "Fail" }); ;
+                }
+
+                cliente.Edad = value.Edad;
+                cliente.Direccion = WebUtility.HtmlEncode(value.Direccion);
+                cliente.Correo = WebUtility.HtmlEncode(value.Correo);
+                cliente.Telefono = WebUtility.HtmlEncode(value.Telefono);
+                cliente.PrestamosActivos = value.PrestamosActivos;
+
+                context.SaveChanges();
+            }
+            catch
+            {
+                error = true;
+            }
+
+            var result = new
+            {
+                Status = !error ? "Success" : "Fail"
+            };
+
+            return new JsonResult(result);
         }
 
         // DELETE api/<LectorController>/5
@@ -107,9 +138,9 @@ namespace ProyectoBiblioteca.Controllers
         public void Delete(int id)
         {
             var context = new bibliotecaContext();
-            var lector = context.Lector.Where<Lector>(e => e.IdLector == id).FirstOrDefault();
-            if (lector == null) return;
-            context.Lector.Remove(lector);
+            var cliente = context.Lector.Where<Lector>(e => e.IdLector == id).FirstOrDefault();
+            if (cliente == null) return;
+            context.Lector.Remove(cliente);
             context.SaveChanges();
         }
     }
