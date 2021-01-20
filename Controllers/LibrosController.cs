@@ -19,12 +19,12 @@ namespace ProyectoBiblioteca.Controllers
         {
         var context = new bibliotecaContext();
         var libro = from b in context.Libro
-                     /*join s in context.AutoresLibro on b.Isbn equals s.RIsbn
+                    /* join s in context.AutoresLibro on b.Isbn equals s.RIsbn
                      join t in context.Editorial on b.REditorial equals t.IdEditorial
                      join u in context.Clasificacion on b.RClasificacion equals u.IdClasificacion
                      join v in context.Subclasificacion on b.RSubclasificacion equals v.IdSubclasificacion
-                     join w in context.Libreros on b.RUbicacion equals w.IdLibrero
-                    orderby b.Isbn ascending*/
+                     join w in context.Libreros on b.RUbicacion equals w.IdLibrero*/
+
                     select new Libro
                      {
                          Isbn = b.Isbn,
@@ -34,7 +34,12 @@ namespace ProyectoBiblioteca.Controllers
                          RSubclasificacion = b.RSubclasificacion,
                          RUbicacion = b.RUbicacion,
                          Año = b.Año,
-                         Existencias = b.Existencias
+                         Existencias = b.Existencias,
+
+                         /*REditorialNavigation = t.NombreEditorial,
+                         RClasificacionNavigation = u.NombreClasificacion*/
+
+                         
                      };
             return libro;
         }
