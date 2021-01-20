@@ -52,9 +52,9 @@ namespace ProyectoBiblioteca.Controllers
 
         // POST api/<LibrosController>
         [HttpPost]
-        public IActionResult Post([FromBody] Libro value)
+        public void Post([FromBody] Libro value)
         {
-            bool error = false;
+            /*bool error = false;
 
             string titulo = WebUtility.HtmlEncode(value.Titulo);
 
@@ -75,14 +75,15 @@ namespace ProyectoBiblioteca.Controllers
                 Status = !error ? "Success" : "Fail"
             };
 
-            return new JsonResult(result);
+            return new JsonResult(result);*/
 
-            /*
+            
             var context = new bibliotecaContext();
             Libro libro = new Libro
             {
                 Isbn = value.Isbn,
                 Titulo = value.Titulo,
+                RAutor = value.RAutor,
                 REditorial = value.REditorial,
                 RClasificacion = value.RClasificacion,
                 RSubclasificacion = value.RSubclasificacion,
@@ -93,7 +94,7 @@ namespace ProyectoBiblioteca.Controllers
             };
             context.Libro.Add(libro);
             context.SaveChanges();
-            */
+            
         }
 
         // PUT api/<LibrosController>/5
