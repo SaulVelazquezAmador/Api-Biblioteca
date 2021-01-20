@@ -16,6 +16,7 @@ namespace ProyectoBiblioteca.Models
 
         public string Isbn { get; set; }
         public string Titulo { get; set; }
+        public int? RAutor { get; set; }
         public int? REditorial { get; set; }
         public int? RClasificacion { get; set; }
         public int? RSubclasificacion { get; set; }
@@ -23,6 +24,7 @@ namespace ProyectoBiblioteca.Models
         public int? Año { get; set; }
         public int? Existencias { get; set; }
 
+        public virtual Autor RAutorNavigation { get; set; }
         public virtual Clasificacion RClasificacionNavigation { get; set; }
         public virtual Editorial REditorialNavigation { get; set; }
         public virtual Subclasificacion RSubclasificacionNavigation { get; set; }

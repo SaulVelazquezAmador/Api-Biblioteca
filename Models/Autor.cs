@@ -13,5 +13,7 @@ namespace ProyectoBiblioteca.Models
         public string NombreAutor { get; set; }
         public string ApellidoAutor{ get; set; }
         public string Nacionalidad { get; set; }
+
+        public virtual ICollection<Libro> Libro { get; set; }
     }
 }

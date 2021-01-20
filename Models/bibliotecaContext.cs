@@ -20,7 +20,7 @@ namespace ProyectoBiblioteca.Models
         }
 
         public virtual DbSet<Autor> Autor { get; set; }
-        public virtual DbSet<AutoresLibro> AutoresLibro { get; set; }
+        //public virtual DbSet<AutoresLibro> AutoresLibro { get; set; }
         public virtual DbSet<Bibliotecario> Bibliotecario { get; set; }
         public virtual DbSet<Clasificacion> Clasificacion { get; set; }
         public virtual DbSet<Editorial> Editorial { get; set; }
@@ -70,11 +70,15 @@ namespace ProyectoBiblioteca.Models
                     .HasCollation("utf8_general_ci");
             });
 
-            modelBuilder.Entity<AutoresLibro>(entity =>
+            /*modelBuilder.Entity<AutoresLibro>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.IdAutorLibro)
+                   .HasName("PRIMARY");
 
                 entity.ToTable("autores_libro");
+
+                entity.Property(e => e.IdAutorLibro).HasColumnName("ID_AutorLibro");
+
 
                 entity.HasIndex(e => e.RAutor)
                     .HasName("ID_Autor_idx");
@@ -100,7 +104,7 @@ namespace ProyectoBiblioteca.Models
                     .WithMany()
                     .HasForeignKey(d => d.RIsbn)
                     .HasConstraintName("ISBN");
-            });
+            });*/
 
             modelBuilder.Entity<Bibliotecario>(entity =>
             {
@@ -196,6 +200,11 @@ namespace ProyectoBiblioteca.Models
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
 
+                entity.Property(e => e.Telefono)
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
                 entity.Property(e => e.PrestamosActivos).HasColumnName("Prestamos_Activos");
             });
 
@@ -222,6 +231,9 @@ namespace ProyectoBiblioteca.Models
 
                 entity.ToTable("libro");
 
+                entity.HasIndex(e => e.RAutor)
+                    .HasName("ID_Autor_idx");
+
                 entity.HasIndex(e => e.RClasificacion)
                     .HasName("ID_Clasificacion_idx");
 
@@ -240,6 +252,8 @@ namespace ProyectoBiblioteca.Models
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
 
+                entity.Property(e => e.RAutor).HasColumnName("R_Autor");
+
                 entity.Property(e => e.RClasificacion).HasColumnName("R_Clasificacion");
 
                 entity.Property(e => e.REditorial).HasColumnName("R_Editorial");
@@ -252,6 +266,11 @@ namespace ProyectoBiblioteca.Models
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
+
+                entity.HasOne(d => d.RAutorNavigation)
+                    .WithMany(p => p.Libro)
+                    .HasForeignKey(d => d.RAutor)
+                    .HasConstraintName("ID_Autor");
 
                 entity.HasOne(d => d.RClasificacionNavigation)
                     .WithMany(p => p.Libro)

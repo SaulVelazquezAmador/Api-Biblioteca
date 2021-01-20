@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ProyectoBiblioteca.Models;
 
+using System.Net;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ProyectoBiblioteca.Controllers
@@ -23,26 +24,61 @@ namespace ProyectoBiblioteca.Controllers
                             select new Bibliotecario
                             {
                                 IdBibliotecario = b.IdBibliotecario,
-                                NombreBibliotecario = b.NombreBibliotecario,
-                                ApellidoBibliotecario = b.ApellidoBibliotecario,
-                                Correo = b.Correo,
-                                Contraseña = b.Contraseña
+                                NombreBibliotecario = WebUtility.HtmlEncode(b.NombreBibliotecario),
+                                ApellidoBibliotecario = WebUtility.HtmlEncode(b.ApellidoBibliotecario),
+                                Correo = WebUtility.HtmlEncode(b.Correo),
+                                Contraseña = WebUtility.HtmlEncode(b.Contraseña)
                             };
             return empleados;
         }
 
         // GET api/<BibliotecariosController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Bibliotecario Get(int id)
         {
-            return "value";
+            var context = new bibliotecaContext();
+
+            Bibliotecario bibliotecario = context.Bibliotecario.Where<Bibliotecario>(e => e.IdBibliotecario == id).FirstOrDefault<Bibliotecario>();
+            if (bibliotecario == null)
+            {
+                return null;
+            }
+
+
+            return bibliotecario;
         }
 
         // POST api/<BibliotecariosController>
         [HttpPost]
-        public void Post([FromBody] Bibliotecario value)
+        public IActionResult Post([FromBody] Bibliotecario value)
         {
-            var context = new bibliotecaContext();
+            bool error = false;
+
+            string nombrebibliotecario = WebUtility.HtmlEncode(value.NombreBibliotecario);
+            string apellidobibliotecario = WebUtility.HtmlEncode(value.ApellidoBibliotecario);
+            string correo = WebUtility.HtmlEncode(value.Correo);
+            string contrasena = WebUtility.HtmlEncode(value.Contraseña);
+
+            try
+            {
+                var context = new bibliotecaContext();
+                context.Bibliotecario.Add(value);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException.Message);
+                error = true;
+            }
+
+            var result = new
+            {
+                Status = !error ? "Success" : "Fail"
+            };
+
+            return new JsonResult(result);
+
+            /*var context = new bibliotecaContext();
             Bibliotecario empleado = new Bibliotecario
             {
                 IdBibliotecario = value.IdBibliotecario,
@@ -53,6 +89,7 @@ namespace ProyectoBiblioteca.Controllers
             };
             context.Bibliotecario.Add(empleado);
             context.SaveChanges();
+            */
         }
 
         // PUT api/<BibliotecariosController>/5

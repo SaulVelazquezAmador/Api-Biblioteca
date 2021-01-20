@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ProyectoBiblioteca.Models;
 
+using System.Net;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ProyectoBiblioteca.Controllers
@@ -22,16 +23,25 @@ namespace ProyectoBiblioteca.Controllers
                               select new Clasificacion
                               {
                                   IdClasificacion = b.IdClasificacion,
-                                  NombreClasificacion = b.NombreClasificacion
+                                  NombreClasificacion = WebUtility.HtmlEncode(b.NombreClasificacion)
                               };
                 return clasificacion;
         }
 
         // GET api/<ClasificacionController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Clasificacion Get(int id)
         {
-            return "value";
+            var context = new bibliotecaContext();
+
+            Clasificacion clasificacion = context.Clasificacion.Where<Clasificacion>(e => e.IdClasificacion == id).FirstOrDefault<Clasificacion>();
+            if (clasificacion == null)
+            {
+                return null;
+            }
+
+
+            return clasificacion;
         }
 
         // POST api/<ClasificacionController>
