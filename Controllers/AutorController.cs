@@ -54,7 +54,7 @@ namespace ProyectoBiblioteca.Controllers
 
             string nombreautor = WebUtility.HtmlEncode(value.NombreAutor);
             string apellidoautor = WebUtility.HtmlEncode(value.ApellidoAutor);
-            string nacionalidad = WebUtility.HtmlEncode(value.Nacionalidad);
+            string nacionalidad = value.Nacionalidad;
 
             try
             {
